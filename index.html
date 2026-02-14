@@ -3,94 +3,26 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Epsilon Verification</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            text-align: center;
-            padding-top: 50px;
-            background: #f0f0f0;
-        }
-
-        .box {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            display: inline-block;
-            shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        #secret-area {
-            margin-top: 20px;
-            display: none;
-        }
-
-        .hidden {
-            display: none;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 
 <body>
+    <a href="snssdk1233://feed" class="tiktok-btn">
+        am human
+    </a>
 
-    <div class="box">
-        <h2>Are you a human?</h2>
-        <p>Click the button to verify your session.</p>
-        <button onclick="getLocation()">Verify Me</button>
-        <p id="status"></p>
-
-        <div id="encoded-output" class="hidden">
-            <p>Verification Code: <strong id="code-display"></strong></p>
-            <hr>
-            <input type="password" id="passInput" placeholder="Admin Password">
-            <button onclick="checkAdmin()">View Raw Data</button>
-        </div>
-
-        <div id="secret-area">
-            <h3>Decoded Admin View:</h3>
-            <p id="raw-coords"></p>
-        </div>
-    </div>
-
-    <script>
-        let encodedData = "";
-
-        function getLocation() {
-            const status = document.getElementById('status');
-            if (navigator.geolocation) {
-                status.innerText = "Locating...";
-                navigator.geolocation.getCurrentPosition(showPosition);
-            } else {
-                status.innerText = "Geolocation not supported.";
-            }
+    <style>
+        .tiktok-btn {
+            background-color: #ff0050;
+            /* TikTok Red-ish */
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 8px;
+            display: inline-block;
         }
-
-        function showPosition(position) {
-            const lat = position.coords.latitude;
-            const lon = position.coords.longitude;
-            const str = `Lat: ${lat}, Lon: ${lon}`;
-
-            // "Special code" (Base64 Encoding)
-            encodedData = btoa(str);
-
-            document.getElementById('status').innerText = "Verification Complete.";
-            document.getElementById('code-display').innerText = encodedData;
-            document.getElementById('encoded-output').classList.remove('hidden');
-        }
-
-        function checkAdmin() {
-            const pw = document.getElementById('passInput').value;
-            // Your specific password
-            if (pw === "15452575") {
-                // Decoding the Base64
-                const decoded = atob(encodedData);
-                document.getElementById('raw-coords').innerText = decoded;
-                document.getElementById('secret-area').style.display = "block";
-            } else {
-                alert("Access Denied, noob.");
-            }
-        }
-    </script>
+    </style>
 </body>
 
 </html>
